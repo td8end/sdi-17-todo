@@ -7,9 +7,9 @@ function listBuild(){
         let li = document.createElement("li");
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        li.appendChild(checkbox);
         li.appendChild(document.createTextNode(tdArray[i]));
         checkbox.dataset.index = i;
-        li.appendChild(checkbox);
         document.getElementById("myList").appendChild(li);
     }
 }
@@ -29,9 +29,15 @@ userInput = (eventObject.target.value)
 function toDoPush(listItem) {
     tdArray.push(listItem);
     listBuild()
+    inputField.value = ''
 }
 let subBtn = document.querySelector('#button1');
 let remBtn = document.querySelector('#button2');
+inputField.addEventListener("keypress", function(event){
+    if (event.key === "Enter"){
+        toDoPush(userInput)
+    }
+}); 
 subBtn.addEventListener("click", () => toDoPush(userInput))
 remBtn.addEventListener("click", () => removeChecked())
 //listBuild();
